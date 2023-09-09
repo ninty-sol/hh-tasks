@@ -25,3 +25,12 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+.font-Nebula-Regular {
+  font-family: 'Nebula-Regular', sans-serif;
+}
+
+.custom-placeholder {
+  font-family: 'Nebula-Regular', sans-serif;
+  color: #999;
+}
