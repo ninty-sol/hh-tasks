@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import "../../app/fonts.css";
 import UserClient from "./UserClient";
 
+// Import React, useState, and any other necessary dependencies
+
 const UserServer: React.FC = () => {
   const [name, setName] = useState("");
   const [twitter, setTwitter] = useState("");
@@ -19,18 +21,33 @@ const UserServer: React.FC = () => {
     setTwitterError(false);
   };
 
-  const handleNextClick = () => {
+  const handleNextClick = async () => {
     if (name.trim() === "") {
       setNameError(true);
+      return;
     }
     if (twitter.trim() === "") {
       setTwitterError(true);
+      return;
     }
 
-    if (name.trim() !== "" && twitter.trim() !== "") {
-      // Handle data storage or other actions here
-      // Redirect to the next page if needed
-      // Example: window.location.href = '/connect';
+    try {
+      const response = await fetch('/api/saveUserInput', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, twitter }),
+      });
+
+      if (response.ok) {
+        // Redirect to the next page if needed
+        // Example: window.location.href = '/connect';
+      } else {
+        console.error('Error saving user input:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error saving user input:', error);
     }
   };
 
