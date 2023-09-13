@@ -1,15 +1,15 @@
 "use client";
-import React, { useState } from "react";
-import "../../app/fonts.css";
-import UserClient from "./UserClient";
-
-// Import React, useState, and any other necessary dependencies
+import { useState } from 'react';
+import { useRouter } from 'next/router';
+import '../../app/fonts.css';
+import UserClient from './UserClient';
 
 const UserServer: React.FC = () => {
-  const [name, setName] = useState("");
-  const [twitter, setTwitter] = useState("");
+  const [name, setName] = useState('');
+  const [twitter, setTwitter] = useState('');
   const [nameError, setNameError] = useState(false);
   const [twitterError, setTwitterError] = useState(false);
+  const router = useRouter();
 
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
@@ -22,11 +22,11 @@ const UserServer: React.FC = () => {
   };
 
   const handleNextClick = async () => {
-    if (name.trim() === "") {
+    if (name.trim() === '') {
       setNameError(true);
       return;
     }
-    if (twitter.trim() === "") {
+    if (twitter.trim() === '') {
       setTwitterError(true);
       return;
     }
@@ -41,8 +41,8 @@ const UserServer: React.FC = () => {
       });
 
       if (response.ok) {
-        // Redirect to the next page if needed
-        // Example: window.location.href = '/connect';
+        // Redirect to the "connect" page
+        router.push('/connect');
       } else {
         console.error('Error saving user input:', response.statusText);
       }

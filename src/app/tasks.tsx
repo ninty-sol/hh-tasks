@@ -1,7 +1,14 @@
 import React from 'react';
 import Footer from '../components/Footer';
 
-const Task = ({ date, month, time, status }) => {
+interface TaskProps {
+  date: string;
+  month: string;
+  time: string;
+  status: 'ongoing' | 'upcoming' | 'ended';
+}
+
+const Task: React.FC<TaskProps> = ({ date, month, time, status }) => {
   const getStatusColor = () => {
     if (status === 'ongoing') {
       return 'bg-green-500';
